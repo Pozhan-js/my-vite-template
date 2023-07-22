@@ -2,12 +2,11 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-18 22:12:16
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-19 10:06:36
+ * @LastEditTime: 2023-07-22 11:59:55
  * @FilePath: /my-vite-project/src/App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -20,7 +19,8 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <el-button type="primary" round>Primary</el-button>
-  <HelloWorld msg="Vite + Vue" />
+
+  <svg-icon name="refresh" size="20" spin></svg-icon>
 </template>
 
 <style scoped>

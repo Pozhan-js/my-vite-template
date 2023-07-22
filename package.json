@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "build:test": "vue-tsc && vite build --mode test",
+    "build:pro": "vue-tsc && vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint src",
     "fix": "eslint src --fix",
@@ -14,6 +16,7 @@
     "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
+    "preinstall": "node ./scripts/preinstall.js",
     "commitlint": "commitlint --config commitlint.config.cjs -e -V"
   },
   "dependencies": {
@@ -55,6 +58,7 @@
     "stylelint-order": "^6.0.1",
     "typescript": "^4.9.3",
     "vite": "^4.4.0",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.8.3"
   },
   "lint-staged": {
