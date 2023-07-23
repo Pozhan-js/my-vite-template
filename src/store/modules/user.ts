@@ -2,29 +2,49 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-22 17:08:28
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-22 17:36:06
+ * @LastEditTime: 2023-07-23 20:01:38
  * @FilePath: /my-vite-project/src/store/modules/user.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { defineStore } from 'pinia'
-import { UserState } from './model/userModel'
-
-// 你可以对 `defineStore()` 的返回值进行任意命名，但最好使用 store 的名字，同时以 `use` 开头且以 `Store` 结尾。(比如 `useUserStore`，`useCartStore`，`useProductStore`)
-// 第一个参数是你的应用中 Store 的唯一 ID。
-export const useUserStore = defineStore('userStore', {
-  // 其他配置... 这里的this相当于store对象 this.count
+import { getUserInfo, logout } from '@/api'
+import type { UserState } from './model/userModel'
+import type { UserInfo } from '@/api/user/types'
+import { useAuthStore } from './auth'
+import { RESEETSTORE } from '@/utils/reset'
+export const useUserStore = defineStore({
+  id: 'app-user',
   state: (): UserState => ({
     token: '',
     userInfo: null,
   }),
-  // 状态异同步改变
+
   actions: {
-    increment() {
-      this.token = '123'
+    // setToken
+    setToken(token: string) {
+      this.token = token
+    },
+    // setUserInfo
+    setUserInfo(userInfo: UserInfo) {
+      this.userInfo = userInfo
+    },
+
+    async GetInfoAction() {
+      const { data } = await getUserInfo()
+      // 结构得到用户信息，按钮权限，路由权限
+      const { avatar, buttons, name, roles, routes } = data
+      const authStore = useAuthStore()
+      // 存储用户信息
+      this.setUserInfo({ avatar, name })
+      // 存储用户权限信息
+      authStore.setAuth({ buttons, roles, routes })
+    },
+
+    async Logout() {
+      await logout()
+      RESEETSTORE()
     },
   },
-  // 相当于计算属性
-  getters: {
-    double: (state) => state.token + '123',
-  },
+  // 设置为true，缓存state
+  persist: true,
 })

@@ -14,8 +14,8 @@ import { SvgIcon } from './SvgIcon'
 // 这个地方
 const Components: {
   [propName: string]: Component
-} = { SvgIcon } 
-//请注意这里是缩写 在对象中属性和值相同时可以只写一个 
+} = { SvgIcon }
+//请注意这里是缩写 在对象中属性和值相同时可以只写一个
 // 例如 { SvgIcon: SvgIcon } 可以缩写为 { SvgIcon }
 
 export default {

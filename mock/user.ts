@@ -2,11 +2,11 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-22 15:34:17
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-22 15:48:09
+ * @LastEditTime: 2023-07-23 00:47:21
  * @FilePath: /my-vite-project/mock/user.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import { resultError, resultSuccess, getRequestToken } from './utils'
+import { resultError, resultSuccess, getRequestToken } from './_utils'
 // mock/user.ts
 
 function createUserList() {

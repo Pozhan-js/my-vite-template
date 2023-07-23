@@ -2,22 +2,28 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-22 15:37:11
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-23 00:37:23
+ * @LastEditTime: 2023-07-23 01:08:28
  * @FilePath: /my-vite-project/src/utils/http/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import axios from 'axios'
-import type { AxiosInstance, AxiosError, AxiosResponse } from 'axios'
+import type {
+  AxiosInstance,
+  AxiosError,
+  AxiosResponse,
+  AxiosRequestConfig,
+} from 'axios'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/store/modules/user'
 import { ResultEnum } from '@/enums/httpEnums'
 import { LOGIN_URL } from '@/config/config'
 import router from '@/router'
+import { ResultData } from './type'
 // 创建 axios 实例  export interface AxiosInstance extends Axios 继承原始类
 const service: AxiosInstance = axios.create({
   //
   baseURL: import.meta.env.VITE_APP_BASE_API, // url = base url + request url  baseURL 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
-  timeout: 6000,
+  timeout: ResultEnum.TIMEOUT as number, // 请求超时时间
 })
 
 /**
@@ -74,7 +80,7 @@ axios.interceptors.response.use(
 
     let message = ''
     const status = error.response?.status
-
+    //匹配状态码
     switch (status) {
       case 401:
         message = 'token 失效，请重新登录'
@@ -97,4 +103,38 @@ axios.interceptors.response.use(
     return Promise.reject(error)
   },
 )
-export default service
+
+const http = {
+  get<T>(
+    url: string,
+    params?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<ResultData<T>> {
+    return service.get(url, { params, ...config })
+  },
+
+  post<T>(
+    url: string,
+    data?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<ResultData<T>> {
+    return service.post(url, data, config)
+  },
+
+  put<T>(
+    url: string,
+    data?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<ResultData<T>> {
+    return service.put(url, data, config)
+  },
+
+  delete<T>(
+    url: string,
+    data?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<ResultData<T>> {
+    return service.delete(url, { data, ...config })
+  },
+}
+export default http

@@ -2,7 +2,7 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-18 22:12:16
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-22 15:27:44
+ * @LastEditTime: 2023-07-23 08:32:13
  * @FilePath: /my-vite-project/vite.config.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -16,10 +16,10 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
   // command,
-  const { mode ,command} = config
+  const { mode, command } = config
   const env = loadEnv(mode, process.cwd())
   // console.log('env', env);
-  
+
   return {
     base: './',
     plugins: [
@@ -27,7 +27,7 @@ export default defineConfig((config) => {
       vueJsx(),
       viteMockServe({
         // 只在开发阶段开启 mock 服务
-        enable: command === 'serve'
+        localEnabled: command === 'serve',
       }),
       createSvgIconsPlugin({
         // Specify the icon folder to be cached  指定需要缓存的图标文件夹
@@ -36,18 +36,17 @@ export default defineConfig((config) => {
         // Specify symbolId format  指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
 
-         /**
-       * 自定义插入位置
-       * @default: body-last
-       */
-      // inject?: 'body-last' | 'body-first'
+        /**
+         * 自定义插入位置
+         * @default: body-last
+         */
+        // inject?: 'body-last' | 'body-first'
 
-      /**
-       * custom dom id
-       * @default: __svg__icons__dom__
-       */
-      // customDomId: '__svg__icons__dom__',
-
+        /**
+         * custom dom id
+         * @default: __svg__icons__dom__
+         */
+        // customDomId: '__svg__icons__dom__',
       }),
     ],
     resolve: {
@@ -56,6 +55,10 @@ export default defineConfig((config) => {
       },
     },
     css: {
+      /**
+       * 在每个 SCSS 文件编译时，都会自动引入
+       * "./src/styles/variable.scss" 文件。这个文件会被添加到每个 SCSS 文件的顶部。
+       */
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
