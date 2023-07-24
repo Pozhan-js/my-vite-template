@@ -2,7 +2,7 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-22 15:37:11
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-23 01:08:28
+ * @LastEditTime: 2023-07-24 23:43:40
  * @FilePath: /my-vite-project/src/utils/http/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,6 +18,7 @@ import { useUserStore } from '@/store/modules/user'
 import { ResultEnum } from '@/enums/httpEnums'
 import { LOGIN_URL } from '@/config/config'
 import router from '@/router'
+import { RESEETSTORE } from '../reset'
 import { ResultData } from './type'
 // 创建 axios 实例  export interface AxiosInstance extends Axios 继承原始类
 const service: AxiosInstance = axios.create({
@@ -31,7 +32,7 @@ const service: AxiosInstance = axios.create({
  * @param {*} config
  * @return {*}
  */
-axios.interceptors.request.use(
+service.interceptors.request.use(
   (config) => {
     // 在发送请求之前做些什么
     // 在发送请求之前获取token
@@ -55,13 +56,14 @@ axios.interceptors.request.use(
  * @param {*} response
  * @return {*}
  */
-axios.interceptors.response.use(
+service.interceptors.response.use(
   (response: AxiosResponse) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     const { data } = response
 
     if (data.code === ResultEnum.EXPIRE) {
+      RESEETSTORE()
       ElMessage.error(data.message || ResultEnum.ERRMESSAGE)
       router.replace(LOGIN_URL)
       return Promise.reject(data)

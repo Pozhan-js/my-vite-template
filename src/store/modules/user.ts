@@ -2,7 +2,7 @@
  * @Author: Why so serious my dear 854059946@qq.com
  * @Date: 2023-07-22 17:08:28
  * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-23 20:01:38
+ * @LastEditTime: 2023-07-24 23:40:18
  * @FilePath: /my-vite-project/src/store/modules/user.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,7 +18,6 @@ export const useUserStore = defineStore({
     token: '',
     userInfo: null,
   }),
-
   actions: {
     // setToken
     setToken(token: string) {
@@ -28,10 +27,10 @@ export const useUserStore = defineStore({
     setUserInfo(userInfo: UserInfo) {
       this.userInfo = userInfo
     },
-
     async GetInfoAction() {
       const { data } = await getUserInfo()
-      // 结构得到用户信息，按钮权限，路由权限
+      console.log('用户信息', data)
+
       const { avatar, buttons, name, roles, routes } = data
       const authStore = useAuthStore()
       // 存储用户信息
@@ -39,7 +38,6 @@ export const useUserStore = defineStore({
       // 存储用户权限信息
       authStore.setAuth({ buttons, roles, routes })
     },
-
     async Logout() {
       await logout()
       RESEETSTORE()

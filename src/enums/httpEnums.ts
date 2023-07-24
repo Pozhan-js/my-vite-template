@@ -1,11 +1,11 @@
 /*
- * @Author: Why so serious my dear 854059946@qq.com
- * @Date: 2023-07-22 17:41:40
- * @LastEditors: Why so serious my dear 854059946@qq.com
- * @LastEditTime: 2023-07-22 17:41:52
- * @FilePath: /my-vite-project/src/enums/httpEnums.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Author: 朽木白
+ * @Date: 2023-02-03 14:54:34
+ * @LastEditors: 1547702880@@qq.com
+ * @LastEditTime: 2023-03-10 15:09:02
+ * @Description:http请求枚举值
  */
+
 /**
  * @description: 响应结果
  * @argument SUCCESS  请求成功

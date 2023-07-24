@@ -2,8 +2,8 @@
  * @Description:
  * @Autor: codeBo
  * @Date: 2023-03-03 15:37:08
- * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-03-09 10:01:43
+ * @LastEditors: Why so serious my dear 854059946@qq.com
+ * @LastEditTime: 2023-07-24 21:33:12
  */
 declare type Nullable<T> = T | null
 declare type NonNullable<T> = T extends null | undefined ? never : T
@@ -45,6 +45,7 @@ declare namespace Menu {
     meta: MetaProps
     children?: MenuOptions[]
   }
+
   interface MetaProps {
     icon: string
     name: string
